@@ -103,5 +103,9 @@ public class Coloc {
         this.notes = notes;
     }
 
+    public void addRegle(Regle regle) {
+        this.regles.add(regle);
+    }
+
 
 }

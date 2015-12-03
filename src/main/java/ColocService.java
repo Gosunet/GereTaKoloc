@@ -2,6 +2,7 @@ import com.google.gson.Gson;
 import com.mongodb.BasicDBObject;
 import com.mongodb.DBCollection;
 import model.Coloc;
+import model.Regle;
 import model.Tache;
 import model.User;
 import org.bson.types.ObjectId;
@@ -45,6 +46,13 @@ public class ColocService {
         return queryOne.filter("name =", name).get();
     }
 
+    public void deleteColoc(String nameColoc){
+        final Query<Coloc> queryOne = datastore.createQuery(Coloc.class);
+        datastore.findAndDelete(queryOne.filter("name =",nameColoc));
+    }
+
+    //TODO test deleteColoc
+
 
     //Service USER
 
@@ -66,18 +74,47 @@ public class ColocService {
     public void addUser(String nameColoc, String body){
         User user = new Gson().fromJson(body, User.class);
         datastore.save(user);
-        
+
         Coloc coloc = find(nameColoc);
         final Query<Coloc> queryOne = datastore.createQuery(Coloc.class);
         datastore.findAndDelete(queryOne.filter("name =", nameColoc));
         coloc.addUsers(user);
         datastore.save(coloc);
-
+        //
     }
+
+    //TODO deleteUser()
 
     //REGLE
 
+    public List<Regle> findRegles(String nameColoc){
+        return find(nameColoc).getRegles();
+    }
 
+    public Regle findOneRegle(String nameColoc, int numberRegle){
+        for(Regle regle: findRegles(nameColoc)){
+            if (regle.getNumber().equals(numberRegle)){
+                return regle;
+            }
+        }
+        return null;
+    }
+
+    public void addRegle(String nameColoc, String body){
+        Regle regle = new new Gson().fromJson(body, Regle.class);
+        datastore.save(regle);
+
+        final Query<Coloc> queryOne = datastore.createQuery(Coloc.class);
+        Coloc coloc= datastore.findAndDelete(queryOne.filter("name =", nameColoc));
+
+        coloc.addRegle(regle);
+        datastore.save(coloc);
+    }
+    //TODO delete regle
+
+
+    //TODO NOTES
+    //TODO TACHES
 
     //Tâche
 
