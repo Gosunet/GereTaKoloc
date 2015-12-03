@@ -8,6 +8,7 @@ import org.bson.types.ObjectId;
 import org.mongodb.morphia.Datastore;
 import org.mongodb.morphia.query.Query;
 import org.mongodb.morphia.query.UpdateException;
+import org.mongodb.morphia.query.UpdateOperations;
 import org.mongodb.morphia.query.UpdateResults;
 
 import java.util.ArrayList;
@@ -44,6 +45,7 @@ public class ColocService {
         return queryOne.filter("name =", name).get();
     }
 
+
     //Service USER
 
     public List<User> findAllUsers(String nameColoc){
@@ -59,6 +61,18 @@ public class ColocService {
         }
         }
         return null;
+    }
+
+    public void addUser(String nameColoc, String body){
+        User user = new Gson().fromJson(body, User.class);
+        datastore.save(user);
+        
+        Coloc coloc = find(nameColoc);
+        final Query<Coloc> queryOne = datastore.createQuery(Coloc.class);
+        datastore.findAndDelete(queryOne.filter("name =", nameColoc));
+        coloc.addUsers(user);
+        datastore.save(coloc);
+
     }
 
     //REGLE
