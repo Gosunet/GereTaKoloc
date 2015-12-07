@@ -1,4 +1,4 @@
-/**
+/**9gag
  * Created by gosunet on 01/12/15.
  */
 
@@ -63,7 +63,6 @@ public class ColocResource {
             return response;
         });
 
-
         //REGLE
 
         get(API_CONTEXT + "/colocs/:name/regles","application/json", (request, response) ->
@@ -78,8 +77,25 @@ public class ColocResource {
             return response;
         });
 
-        //TODO TACHE
-        //TODO NOTE
+
+        get(API_CONTEXT + "/colocs/:name/notes", "application/json", (request, response) ->
+            colocService.findNotes(request.params(":name")),new JsonTransformer());
+
+        post(API_CONTEXT + "/colocs/:name/notes", "application/json", (request, response) -> {
+            colocService.addNote(request.params(":name"),request.body());
+            response.status(201);
+            return response;
+        });
+
+
+        get(API_CONTEXT + "/colocs/:name/users/:user/taches", "application/json", (request, response) ->
+            colocService.findTaches(request.params(":name"),request.params(":user")), new JsonTransformer());
+
+        post(API_CONTEXT + "/colocs/:name/users/:user/taches", "application/json", (request, response) -> {
+            colocService.addTache(request.params(":name"),request.params(":user"),request.body());
+            response.status(201);
+            return response;
+        });
         //TODO delete
 
     }

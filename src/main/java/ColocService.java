@@ -48,8 +48,6 @@ public class ColocService {
         datastore.findAndDelete(queryOne.filter("name =",nameColoc));
     }
 
-    //TODO test deleteColoc
-
 
     //Service USER
 
@@ -80,7 +78,7 @@ public class ColocService {
         //
     }
 
-    //TODO deleteUser()
+    //TODO Delete User
 
     //REGLE
 
@@ -104,7 +102,8 @@ public class ColocService {
         final Query<Coloc> queryOne = datastore.createQuery(Coloc.class);
         Coloc coloc= datastore.findAndDelete(queryOne.filter("name =", nameColoc));
 
-        coloc.addRegle(regle);datastore.save(coloc);
+        coloc.addRegle(regle);
+        datastore.save(coloc);
     }
 
     public List<Regle> deleteRegle(String nameColoc, String nbRegle){
@@ -126,7 +125,7 @@ public class ColocService {
         return regles;
     }
 
-    //TODO NOTES
+    //TODO teste delete regle
 
     //NOTE
 
@@ -145,13 +144,23 @@ public class ColocService {
         datastore.save(coloc);
     }
 
-
-    //TODO TACHES
+    //TODO delete tache
 
     //TACHE
 
-    public List<Tache> taches(String nameColoc, String nameUser){
+    public List<Tache> findTaches(String nameColoc, String nameUser){
         return findOneUser(nameColoc,nameUser).getTaches();
+    }
+
+    public void addTache(String nameColoc, String nameUser, String body){
+        Tache tache = new Gson().fromJson(body, Tache.class);
+        datastore.save(tache);
+
+        User user = findOneUser(nameColoc, nameUser);
+        user.addTache(tache);
+
+        datastore.save(user);
+
     }
 
 }

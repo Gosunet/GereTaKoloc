@@ -4,10 +4,7 @@
 
 import com.google.gson.Gson;
 import com.mongodb.MongoClient;
-import model.Coloc;
-import model.Regle;
-import model.Tache;
-import model.User;
+import model.*;
 import org.bson.types.ObjectId;
 import org.mongodb.morphia.Datastore;
 import org.mongodb.morphia.Morphia;
@@ -30,7 +27,7 @@ public class Bootstrap {
 
         morphia.mapPackage("model");
 
-        final Datastore datastore2 = morphia.createDatastore(new MongoClient("localhost"),"geretacolocV23");
+        final Datastore datastore2 = morphia.createDatastore(new MongoClient("localhost"),"geretacolocV27");
         datastore2.ensureIndexes();
 
         final User user = new User("jean","dujardin",100,"cacao","1234","jean@dujardin.fr");
@@ -44,12 +41,16 @@ public class Bootstrap {
         final Regle regle1 = new Regle("pas de chaussure","0");
         datastore2.save(regle1);
 
+        final Note note1 = new Note("Yoloooo",new Date());
+        datastore2.save(note1);
+
         final Coloc coloc = new Coloc("32 rue du machin", user,"cooloc");
         datastore2.save(coloc);
 
         final Coloc coloc1 = new Coloc("45 rue de pateouchnic", user,"trocoloc");
         coloc1.addUsers(user2);
         coloc1.addRegle(regle1);
+        coloc1.addNote(note1);
         datastore2.save(coloc1);
 
         System.out.println(coloc1.getRegles().get(0).getContent());
