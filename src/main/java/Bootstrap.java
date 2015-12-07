@@ -5,6 +5,7 @@
 import com.google.gson.Gson;
 import com.mongodb.MongoClient;
 import model.Coloc;
+import model.Regle;
 import model.Tache;
 import model.User;
 import org.bson.types.ObjectId;
@@ -29,7 +30,7 @@ public class Bootstrap {
 
         morphia.mapPackage("model");
 
-        final Datastore datastore2 = morphia.createDatastore(new MongoClient("localhost"),"geretacolocV20");
+        final Datastore datastore2 = morphia.createDatastore(new MongoClient("localhost"),"geretacolocV23");
         datastore2.ensureIndexes();
 
         final User user = new User("jean","dujardin",100,"cacao","1234","jean@dujardin.fr");
@@ -40,25 +41,18 @@ public class Bootstrap {
         datastore2.save(user);
         datastore2.save(user2);
 
-        final Query<User> queryUser = datastore2.createQuery(User.class);
-
-        final List<User> users = queryUser.asList();
-
-        System.out.println(users.get(0).getName());
-        System.out.println(users.get(0).getId());
+        final Regle regle1 = new Regle("pas de chaussure","0");
+        datastore2.save(regle1);
 
         final Coloc coloc = new Coloc("32 rue du machin", user,"cooloc");
         datastore2.save(coloc);
 
         final Coloc coloc1 = new Coloc("45 rue de pateouchnic", user,"trocoloc");
         coloc1.addUsers(user2);
+        coloc1.addRegle(regle1);
         datastore2.save(coloc1);
 
-        final Query<Coloc> queryColoc = datastore2.createQuery(Coloc.class);
-        final List<Coloc> colocs = queryColoc.asList();
-
-        System.out.println(colocs.get(0).getName());
-        System.out.println(colocs.get(0).getId());
+        System.out.println(coloc1.getRegles().get(0).getContent());
 
         new ColocResource(new ColocService(datastore2));
 

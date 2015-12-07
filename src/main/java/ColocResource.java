@@ -52,7 +52,7 @@ public class ColocResource {
             colocService.findAllUsers(request.params(":name")),new JsonTransformer());
 
         //Get an user from coloc :name
-        get(API_CONTEXT + "/colocs/:name/:user","application/json",(request, response) ->
+        get(API_CONTEXT + "/colocs/:name/users/:user","application/json",(request, response) ->
             colocService.findOneUser(request.params(":name"),request.params(":user")),new JsonTransformer());
 
         //Add an user in coloc :name
@@ -64,8 +64,23 @@ public class ColocResource {
         });
 
 
-
         //REGLE
+
+        get(API_CONTEXT + "/colocs/:name/regles","application/json", (request, response) ->
+            colocService.findRegles(request.params(":name")),new JsonTransformer());
+
+        get(API_CONTEXT + "/colocs/:name/regles/:nb","application/json", (request, response) ->
+            colocService.findOneRegle(request.params(":name"),request.params(":nb")),new JsonTransformer());
+
+        post(API_CONTEXT + "/colocs/:name/regles","application/json", (request, response) -> {
+            colocService.addRegle(request.params(":name"),request.body());
+            response.status(201);
+            return response;
+        });
+
+        //TODO TACHE
+        //TODO NOTE
+        //TODO delete
 
     }
 }

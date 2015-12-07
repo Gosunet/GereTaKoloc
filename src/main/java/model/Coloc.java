@@ -78,7 +78,7 @@ public class Coloc {
     }
 
     public List<Regle> getRegles() {
-        return regles;
+        return this.regles;
     }
 
     public void setRegles(List<Regle> regles) {
@@ -105,6 +105,10 @@ public class Coloc {
 
     public void addRegle(Regle regle) {
         this.regles.add(regle);
+    }
+
+    public void addNote(Note note){
+        this.notes.add(note);
     }
 
 

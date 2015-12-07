@@ -1,10 +1,7 @@
 import com.google.gson.Gson;
 import com.mongodb.BasicDBObject;
 import com.mongodb.DBCollection;
-import model.Coloc;
-import model.Regle;
-import model.Tache;
-import model.User;
+import model.*;
 import org.bson.types.ObjectId;
 import org.mongodb.morphia.Datastore;
 import org.mongodb.morphia.query.Query;
@@ -91,7 +88,7 @@ public class ColocService {
         return find(nameColoc).getRegles();
     }
 
-    public Regle findOneRegle(String nameColoc, int numberRegle){
+    public Regle findOneRegle(String nameColoc, String numberRegle){
         for(Regle regle: findRegles(nameColoc)){
             if (regle.getNumber().equals(numberRegle)){
                 return regle;
@@ -101,26 +98,60 @@ public class ColocService {
     }
 
     public void addRegle(String nameColoc, String body){
-        Regle regle = new new Gson().fromJson(body, Regle.class);
+        Regle regle = new Gson().fromJson(body, Regle.class);
         datastore.save(regle);
 
         final Query<Coloc> queryOne = datastore.createQuery(Coloc.class);
         Coloc coloc= datastore.findAndDelete(queryOne.filter("name =", nameColoc));
 
-        coloc.addRegle(regle);
-        datastore.save(coloc);
+        coloc.addRegle(regle);datastore.save(coloc);
     }
-    //TODO delete regle
 
+    public List<Regle> deleteRegle(String nameColoc, String nbRegle){
+        final Query<Coloc> queryOne = datastore.createQuery(Coloc.class);
+        Coloc coloc= datastore.findAndDelete(queryOne.filter("name =", nameColoc));
+
+        List<Regle> regles = coloc.getRegles();
+        int i=0;
+        for (Regle regle: regles){
+            if (regle.getNumber().equals(nbRegle)){
+                regles.remove(i);
+            }
+            i++;
+        }
+
+        datastore.save(regles);
+        coloc.setRegles(regles);
+        datastore.save(coloc);
+        return regles;
+    }
 
     //TODO NOTES
+
+    //NOTE
+
+    public List<Note> findNotes(String nameColoc){
+        return find(nameColoc).getNotes();
+    }
+
+    public void addNote(String nameColoc,String body){
+        Note note = new Gson().fromJson(body, Note.class);
+        datastore.save(note);
+
+        final Query<Coloc> queryOne = datastore.createQuery(Coloc.class);
+        Coloc coloc= datastore.findAndDelete(queryOne.filter("name =", nameColoc));
+
+        coloc.addNote(note);
+        datastore.save(coloc);
+    }
+
+
     //TODO TACHES
 
-    //Tâche
+    //TACHE
 
-    //public List<Tache> findAllTask(String user){
-      //  return ;;
-//    }
-
+    public List<Tache> taches(String nameColoc, String nameUser){
+        return findOneUser(nameColoc,nameUser).getTaches();
+    }
 
 }
