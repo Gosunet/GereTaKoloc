@@ -43,6 +43,16 @@ public class ColocService {
         return queryOne.filter("name =", name).get();
     }
 
+    public Coloc findOneColoc(String login, String mdp){
+        final Query<User> queryUser = datastore.createQuery(User.class);
+        if (queryUser.filter("login =",login).filter("mdp =",mdp).get()!=null){
+            final Query<Coloc> queryColoc = datastore.createQuery(Coloc.class);
+            queryColoc.field("users.login").equals(login);
+            return queryColoc.retrievedFields(false,"users").get();
+        };
+        return null;
+    }
+
     public void deleteColoc(String nameColoc){
         final Query<Coloc> queryOne = datastore.createQuery(Coloc.class);
         datastore.findAndDelete(queryOne.filter("name =",nameColoc));

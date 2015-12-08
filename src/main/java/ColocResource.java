@@ -37,9 +37,16 @@ public class ColocResource {
             return response;
         });
 
-        //get une coloc
+        //get une coloc from NameColoc
         get(API_CONTEXT + "/colocs/:name","application/json",(request, response) ->
             colocService.find(request.params(":name")), new JsonTransformer());
+
+        //get coloc from user login and mdp
+
+        get(API_CONTEXT + "/login/:login/:mdp", "application/json", (request, response) ->
+            colocService.findOneColoc(request.params(":login"),request.params(":mdp")), new JsonTransformer());
+
+
 
         //get all colocs
         get(API_CONTEXT + "/colocs","application/json",(request, response)

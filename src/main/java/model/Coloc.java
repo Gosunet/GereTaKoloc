@@ -5,9 +5,7 @@ import org.mongodb.morphia.annotations.Entity;
 import org.mongodb.morphia.annotations.Id;
 import org.mongodb.morphia.annotations.Reference;
 
-import javax.annotation.Generated;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 
 /**
@@ -21,11 +19,13 @@ public class Coloc {
     private String address;
 
     @Reference
-    private List<User> users = new ArrayList<User>();
+    private List<User> users = new ArrayList<>();
     @Reference
-    private List<Note> notes = new ArrayList<Note>();
+    private List<Note> notes = new ArrayList<>();
     @Reference
-    private List<Regle> regles = new ArrayList<Regle>();
+    private List<Regle> regles = new ArrayList<>();
+    @Reference
+    private List<Charge> charges = new ArrayList<>();
 
     public Coloc(String address, User user, String name) {
         this.address = address;
@@ -39,7 +39,6 @@ public class Coloc {
         this.users = users;
         this.notes = notes;
         this.regles = regles;
-
     }
 
     //for morphia
@@ -51,6 +50,7 @@ public class Coloc {
         this.regles=null;
         this.name="no_name";
         this.address="no_adress";
+        this.charges=null;
     }
 
     public ObjectId getId() {
@@ -111,5 +111,15 @@ public class Coloc {
         this.notes.add(note);
     }
 
+    public List<Charge> getCharges() {
+        return charges;
+    }
 
+    public void setCharges(List<Charge> charges) {
+        this.charges = charges;
+    }
+
+    public void addCharge(Charge charge){
+        this.charges.add(charge);
+    }
 }
