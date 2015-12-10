@@ -23,14 +23,16 @@ public class Bootstrap {
     public static void main(String[] args) {
        // get("/", (request, response) -> "Hello World");
 
+        staticFileLocation("/public");
+
         final Morphia morphia = new Morphia();
 
         morphia.mapPackage("model");
 
-        final Datastore datastore2 = morphia.createDatastore(new MongoClient("localhost"),"geretacolocV34");
+        final Datastore datastore2 = morphia.createDatastore(new MongoClient("localhost"),"geretacolocV39");
         datastore2.ensureIndexes();
 
-        final User user = new User("jean","dujardin",100,"cacao","1234","jean@dujardin.fr");
+        final User user = new User("jean","dujardin",100,"cacao2","1234","jean@dujardin.fr");
         final User user2 = new User("jeanddddd","dujardddddin",100,"cadddcao","1ddd234","cacao@enib.fr");
         final User user3 = new User("nicolas","dupont",100,"cacao","4567","pouet@enib.fr");
         final Tache tache1 = new Tache("écouter chanter ando",new Date(),false);
@@ -47,14 +49,12 @@ public class Bootstrap {
         datastore2.save(note1);
 
         final Coloc coloc = new Coloc("32 rue du machin", user,"cooloc");
-        coloc.addUsers(user3);
         datastore2.save(coloc);
 
-        final Coloc coloc1 = new Coloc("45 rue de pateouchnic", user,"trocoloc");
+        final Coloc coloc1 = new Coloc("45 rue de pateouchnic", user3,"trocoloc");
         final Charge charge = new Charge("papier toilette","1000");
         datastore2.save(charge);
         coloc1.addCharge(charge);
-        coloc1.addUsers(user2);
         coloc1.addRegle(regle1);
         coloc1.addNote(note1);
         datastore2.save(coloc1);
@@ -62,6 +62,7 @@ public class Bootstrap {
         System.out.println(coloc1.getRegles().get(0).getContent());
 
         new ColocResource(new ColocService(datastore2));
+
 
 
 

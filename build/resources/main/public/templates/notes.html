@@ -1,0 +1,33 @@
+
+<ion-view>
+    <ion-content padding="'true'" has-header="true">
+
+      <div class="bar bar-royal bar-header" padding="'true'">
+        <a class="button button-clear icon ion-home" href="#/home"></a>
+        <h1 class="title">Bloc notes</h1>
+        <a class="button button-clear icon ion-plus"></a>
+      </div>
+
+      <div class="spacer" style="height: 40px;"></div>
+
+      <div ng-controller="ColocListCtrl" show-delete="shouldShowDelete" show-reorder="shouldShowReorder">
+        <div class="note" ng-repeat="note in coloc.notes" type="item-text-wrap">
+
+          <div class="item item-divider" id="Header-note">
+            {{note.date}}
+          </div>
+          <div class="item item-text-wrap" id="Content-note">
+            {{note.content}}
+          </div>
+
+          <div class="spacer" style="height: 10px;"></div>
+
+        </div>
+      </div>
+
+
+
+    </ion-content>
+
+
+</ion-view>

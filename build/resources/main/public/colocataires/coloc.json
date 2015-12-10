@@ -1,0 +1,116 @@
+{
+  "id":{"timestamp":1449581135,"machineIdentifier":4196050,"processIdentifier":3347,"counter":16080118},
+  "name":"La Pandaloc'",
+  "address":"32 rue du machin",
+  "users":[
+
+    {
+      "id": "flocon_de_neige",
+      "name": "Florian MARC",
+      "surname":"Flocon de neige",
+      "avatar": "colocataires/img/flocon_de_neige.jpg",
+      "mail":"flo.com",
+      "mdp":"flo_coucou",
+      "description": "Doudou calin",
+      "color":100,
+      "taches":[]
+    },
+    {
+      "id": "kaulgate",
+      "login":"cacao",
+      "name": "Jonathan LAGNEAUX",
+      "surname":"Kaulgate",
+      "avatar": "colocataires/img/kaulgate.jpg",
+      "mail":"jon.com",
+      "mdp":"jon_coucou",
+      "description": "Je suis hors système",
+      "color":200,
+      "taches":[]
+
+    },
+
+    {
+      "id": "titile",
+      "login":"cacao",
+      "name": "Ando RND",
+      "surname":"Titile",
+      "avatar": "colocataires/img/titile.jpg",
+      "mail":"ando.com",
+      "mdp":"ando_coucou",
+      "description": "Je suis fatiguée!!!!!! :'( ",
+      "color":300,
+      "taches":[]
+    }
+
+  ],
+
+  "notes":[
+    {
+      "id":"1",
+      "content":"appeler le monsieur du 2 ",
+      "date":"3 décembre 2015 12:45"
+    },
+    {
+      "id":"2",
+      "content":"Recuperer la montre de bibi",
+      "date":"6 décembre 2015 12:45"
+    },
+    {
+      "id":"3",
+      "content":"Sortir les poubelles de mme B",
+      "date":"9 décembre 2015 12:45"
+    },
+    {
+      "id":"4",
+      "content":"IJZFIKNFPOJAODKMLJSMODLKMSLKDZ",
+      "date":"17 décembre 2015 12:45"
+    },
+    {
+      "id":"5",
+      "content":"chien",
+      "date":"20 décembre 2015 12:45"
+    },
+    {
+      "id":"6",
+      "content":"recupérer gateau du dimanche ",
+      "date":"25 décembre 2015 12:45"
+    }
+
+  ],
+  "regles":[
+    {
+      "id":"1",
+      "content":"pas de chaussure dans la maison",
+      "number":"1"
+    },
+    {
+      "id":"2",
+      "content":"pas plus de 5 affaires dans le salon",
+      "number":"2"
+    },
+    {
+      "id":"3",
+      "content":"Sortir les poubelles",
+      "number":"3"
+    }
+  ],
+  "charges":[
+    {
+      "id":"1",
+      "nameCharge":"Loyer",
+      "montant":"260"
+    },
+    {
+      "id":"2",
+      "nameCharge":"Telephone",
+      "montant":"27.95"
+    },
+    {
+      "id":"3",
+      "nameCharge":"Gaz et elec",
+      "montant":"109.13"
+    }
+
+  ]
+
+}

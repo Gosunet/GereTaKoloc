@@ -1,0 +1,103 @@
+/* Empty. Add your own CSS if you like */
+
+
+.user-thumbs {
+  float: left;
+  padding: 0.25em;
+  margin-right: 1em;
+  background-color: white;
+  border-radius: 30px;
+  height: 60px;
+  width: 60px;
+}
+
+h2.user-name {
+  font-size: 40px;
+}
+
+h3.user-surname{
+  font-size:20px;
+  color:grey;
+}
+
+.user-description {
+  margin-top: 0.5em;
+  white-space: normal;
+}
+
+h2.titre-projet {
+  font-size:80 px;
+  color:blue;
+}
+
+.Name-coloc{
+  font-size: 30px;
+  color:orange;
+}
+.Address-coloc{
+  font-size:18px;
+  color:black;
+
+}
+/*Style dans le fichier charges.html*/
+.charges-name{
+  float:left;
+  font-size:15px;
+}
+
+.charges-montant{
+  float:right;
+  font-size: 15px;
+  color:grey;
+}
+
+.Charge-tot{
+  padding-left: 1em;
+  padding-right: 3em;
+  font-size:15px;
+}
+
+.Charge-tot-pers{
+  padding-right: 2em;
+  font-style: italic;
+  font-weight: bold;
+  font-size:15px;
+}
+
+
+p#mont-tot{
+  text-align: right;
+  font-size: 15px;
+  color:grey;
+}
+
+p#mont-tot-pers{
+  text-align: right;
+  font-size: 1.1em;
+  color:orange;
+}
+
+/*Style dans le fichier regle.html*/
+p#Numero-regle{
+  float: left;
+  border:1px;
+  border-color:black;
+  color: grey;
+  font-size: 12px;
+}
+
+p#Content-regle{
+  padding-left: 1em;
+  font-size: 13px;
+}
+
+.note{
+  width: auto;
+  padding-top: 15px;
+  padding-bottom: 15px;
+  text-align: center;
+}
+
+.row{
+  font-size: :29px;
+}

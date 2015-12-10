@@ -1,0 +1,21 @@
+<ion-view title="Connexion">
+    <ion-content padding="'true'" class="has-header">
+        <form class="list">
+            <h1 class="titre-projet">Gère Ta coloc'</h1>
+            <div class="spacer" style="width: 300px; height: 74px;"></div>
+            <ion-list>
+                <label class="item item-input item-stacked-label">
+                    <span class="input-label">Pseudo ou e-mail </span>
+                    <input type="text" placeholder="" ng-model="data.username">
+                </label>
+                <label class="item item-input item-stacked-label">
+                    <span class="input-label">Mot de passe</span>
+                    <input type="password" placeholder="" ng-model="data.password">
+                </label>
+            </ion-list>
+            <div class="spacer" style="height: 40px;"></div>
+        </form>
+        <a menu-close="" class="button button-dark button-block " ng-click=" logIn()">Se connecter</a>
+        <a menu-close="" href="#/signup" class="button button-outline button-royal button-block ">Créer un compte</a>
+    </ion-content>
+</ion-view>

@@ -1,0 +1,35 @@
+<ion-view title="Calcul des charges ">
+    <ion-content padding="'true'" class="has-header" ng-controller="ColocListCtrl">
+
+      <ion-nav-bar class="bar-stable bar-royal">
+      <!-- <ion-header-bar class="bar-positive"> -->
+        <ion-nav-buttons>
+          <a href="#/home" class="button button-icon button-clear ion-home" ></a>
+        </ion-nav-buttons>
+      </ion-nav-bar>
+
+      <div class="spacer" style="height: 30px;"></div>
+        <div ng-controller="ChargesCtrl">
+        <a class="button button-full icon-left ion-plus button-positive" ng-click="showPopup_ajouter_charge()">Ajouter une charge</a>
+        </div>
+
+          <ion-list class="charges" show-delete="shouldShowDelete" show-reorder="shouldShowReorder" >
+            <ion-item class="charge" ng-repeat="charge in coloc.charges " type="item-text-wrap">
+                <h2 class="charges-name">{{charge.nameCharge}}</h2>
+                <h3 class="charges-montant">{{charge.montant}} €</h3>
+
+
+              <!-- <ion-delete-button class="ion-minus-circled" ng-click="colocataires.splice($index, 1)"></ion-delete-button> -->
+            </ion-item>
+          </ion-list>
+
+          <div class = "card" >
+          <div class="Charge-tot">Charge totale: <p id="mont-tot">{{montant_total}} €</p> </div>
+          <div class="item item-divider">
+            <div class="Charge-tot-pers">Charge totale par personne : <p id="mont-tot-pers">{{montant_total/nb_users}} €</p></div>
+          </div>
+        </div>
+    </ion-content>
+
+
+</ion-view>
