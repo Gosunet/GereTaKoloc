@@ -84,6 +84,7 @@ public class ColocResource {
             return response;
         });
 
+        //NOTE
 
         get(API_CONTEXT + "/colocs/:name/notes", "application/json", (request, response) ->
             colocService.findNotes(request.params(":name")),new JsonTransformer());
@@ -94,7 +95,7 @@ public class ColocResource {
             return response;
         });
 
-
+        //TACHE
         get(API_CONTEXT + "/colocs/:name/users/:user/taches", "application/json", (request, response) ->
             colocService.findTaches(request.params(":name"),request.params(":user")), new JsonTransformer());
 
@@ -104,6 +105,17 @@ public class ColocResource {
             return response;
         });
         //TODO delete
+
+        //CHARGE
+
+        get(API_CONTEXT + "/colocs/:name/charges","application/json", (request, response) ->
+            colocService.findCharges(request.params(":name")),new JsonTransformer());
+
+        post(API_CONTEXT + "/colocs/:name/charges","application/json",(request, response) -> {
+            colocService.addCharge(request.params(":name"),request.body());
+            response.status(201);
+            return response;
+        });
 
     }
 }

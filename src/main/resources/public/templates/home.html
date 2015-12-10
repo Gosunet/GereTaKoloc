@@ -1,0 +1,89 @@
+<ion-view title="Acceuil">
+  <body ng=ctrlList>
+    <ion-side-menus>
+      <ion-side-menu-content>
+        <ion-content padding="'true'" class="has-header">
+              <!-- Tete de la page -->
+            <ion-nav-bar class="bar-stable bar-royal">
+            <!-- <ion-header-bar class="bar-positive"> -->
+              <ion-nav-back-button></ion-nav-back-button>
+              <ion-nav-buttons side="left">
+                <button class="button button-icon button-clear ion-navicon" ng-click="toggleLeft()"></button>
+              </ion-nav-buttons>
+            </ion-nav-bar>
+            <ion-nav-view name="menu"></ion-nav-view>
+
+            <div class="spacer" style="height: 20px;"></div>
+
+            <div class="card">
+
+              <div ng-controller="ColocListCtrl">
+              <div class="item item-text-wrap">
+                <div class="Name-coloc">{{coloc.name}}</div>
+
+              </div>
+              <div class="item item-divider">
+                <div class="Address-coloc">{{coloc.address}}</div>
+              </div>
+            </div>
+            </div>
+
+            <div class="card">
+              <div class="list card">
+                <ion-list  class="coloc" ng-controller="ColocListCtrl" show-delete="shouldShowDelete" show-reorder="shouldShowReorder" >
+                  <ion-item class="user" ng-repeat="user in coloc.users track by $index" type="item-text-wrap">
+                    <div class="item item-avatar">
+                      <img class="user-thumbs" ng-src="{{user.avatar}}">
+                      <h2 class="user-name">{{user.name}}</h2>
+                      <h3 class="user-surname">{{user.surname}}</h3>
+                    </div>
+                    <div class="item item-body">
+                      <div class="user-description">{{user.description}}</div>
+                    </div>
+
+                    <ion-delete-button class="ion-minus-circled" ng-click="coloc.splice($index, 1)">
+                    </ion-delete-button>
+                  </ion-item>
+                </ion-list>
+              </div>
+
+
+      </div>
+      </ion-content>
+    </ion-side-menu-content>
+
+<!-- Ce que contient notre menu de gauche  -->
+        <ion-side-menu side="left">
+          <ion-content padding="false" class="side-menu-left has-header" <="" ion-content="">
+            <ion-list>
+              <div class="list">
+              <!-- <ion-item>Tâches</ion-item> -->
+              <a class="item item-avatar" href="#/menu/charges">
+                <img src="img_source/charges.jpg">
+                <h2>Charges</h2>
+                <p> Paye tes charges!!!</p></a>
+
+              <a class="item item-avatar" href="#/menu/taches">
+                <img src="img_source/taches.jpg">
+                <h2>Tâches</h2>
+                <p> Fais tes tâches là!!!</p></a>
+
+              <a class="item item-avatar" href="#/menu/regles">
+                <img src="img_source/regle_de_vie.jpg">
+                <h2>Règle de vie</h2>
+                <p>Teuh teuh teuh, règlements!!!</p></a>
+
+              <a href="#/menu/notes" class="item item-avatar">
+                <img src="img_source/notes.jpg">
+                <h2>Notes</h2>
+                <p>Liste de courses, Rappels</p></a>
+
+
+            </div>
+            </ion-list>
+          </ion-content>
+        </ion-side-menu>
+
+      </ion-side-menus>
+    </body>
+</ion-view>

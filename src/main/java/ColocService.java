@@ -47,8 +47,8 @@ public class ColocService {
         final Query<User> queryUser = datastore.createQuery(User.class);
         if (queryUser.filter("login =",login).filter("mdp =",mdp).get()!=null){
             final Query<Coloc> queryColoc = datastore.createQuery(Coloc.class);
-            queryColoc.field("users.login").equals(login);
-            return queryColoc.retrievedFields(false,"users").get();
+            queryColoc.field("users").hasAnyOf(queryUser);
+            return queryColoc.get();
         };
         return null;
     }
@@ -170,6 +170,22 @@ public class ColocService {
         user.addTache(tache);
 
         datastore.save(user);
+
+    }
+
+    //TODO charges
+
+    public List<Charge> findCharges(String nameColoc){
+        return find(nameColoc).getCharges();
+    }
+
+    public void addCharge(String nameColoc, String body){
+        Charge charge = new Gson().fromJson(body, Charge.class);
+        datastore.save(charge);
+
+        Coloc coloc = find(nameColoc);
+        coloc.addCharge(charge);
+        datastore.save(coloc);
 
     }
 
