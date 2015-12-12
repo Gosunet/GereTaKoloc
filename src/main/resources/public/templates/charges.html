@@ -9,10 +9,16 @@
       </ion-nav-bar>
 
       <div class="spacer" style="height: 30px;"></div>
-        <div ng-controller="ChargesCtrl">
-        <a class="button button-full icon-left ion-plus button-positive" ng-click="showPopup_ajouter_charge()">Ajouter une charge</a>
+        <div class="item item-input-inset">
+          <label class="item-input-wrapper">
+            <input type="text" placeholder="Nom de la charge" ng-model="data.nom_charge">
+          </label>
+          <label class="item-input-wrapper">
+            <input type="text" placeholder="Montant de la charge" ng-model="data.montant_charge">
+          </label>
+          <button class="button button-small ion-plus button-positive" ng-click="ajouter_charge()" >
+          </button>
         </div>
-
           <ion-list class="charges" show-delete="shouldShowDelete" show-reorder="shouldShowReorder" >
             <ion-item class="charge" ng-repeat="charge in coloc.charges " type="item-text-wrap">
                 <h2 class="charges-name">{{charge.nameCharge}}</h2>

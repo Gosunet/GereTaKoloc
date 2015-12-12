@@ -15,9 +15,9 @@ public class Note {
     @Id
     private ObjectId id = new ObjectId();
     private String content;
-    private Date date;
+    private String date;
 
-    public Note(String content, Date date) {
+    public Note(String content, String date) {
         this.id = new ObjectId();
         this.content = content;
         this.date = date;
@@ -25,13 +25,13 @@ public class Note {
     private Note(){
         this.id = new ObjectId();
         this.content="no_content";
-        this.date = null;
+        this.date = "no date";
     }
     public String getContent() {
         return content;
     }
 
-    public Date getDate() {
+    public String getDate() {
         return date;
     }
 
@@ -47,7 +47,7 @@ public class Note {
         this.content = content;
     }
 
-    public void setDate(Date date) {
+    public void setDate(String date) {
         this.date = date;
     }
 }

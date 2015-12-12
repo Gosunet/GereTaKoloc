@@ -45,6 +45,12 @@ angular.module('app.controllers', [])
 
 })
 
+.controller('regleCtrl', function($scope, $rootScope){
+    $scope.data = $rootScope.coloc;
+
+
+})
+
 // Controller du Menu slide
 .controller('menuCtrl', function($scope,$ionicSideMenuDelegate) {
   $scope.toggleLeft = function() {
@@ -84,7 +90,7 @@ angular.module('app.controllers', [])
           onTap: function(e){
 
               var new_charge={"nameCharge":$scope.data.nom_charge,"montant":$scope.data.montant_charge};
-              $http.post('api/v1/colocs/'+$scope.data.name+'/charges',new_charge)
+              $http.post('api/v1/colocs/'+$scope.data.name+'/charges',new_charge);
 
               popupCharge.close();
 
@@ -118,6 +124,39 @@ angular.module('app.controllers', [])
             angular.forEach($scope.coloc.users, function (value, key) {
                 nb_users++;
             });
+
+    $scope.ajouterRegle = function (){
+
+        var numberInt =0;
+        var number = 0;
+        angular.forEach($scope.coloc.regles, function(value, key){
+            numberInt = parseInt(value.number,10)+1;
+            number = numberInt.toString();
+
+        });
+        var new_regle={"content":$scope.data.nouvelle_regle,"number":number};
+        $http.post('api/v1/colocs/'+$scope.coloc.name+'/regles',new_regle);
+        $scope.coloc.regles.push(new_regle);
+    };
+
+    $scope.ajouterNote = function (){
+        var date = new Date();
+        var new_note={"content":$scope.data.nouvelle_note, "date":date};
+        $http.post('api/v1/colocs/'+$scope.coloc.name+'/notes',new_note);
+        $scope.coloc.notes.push(new_note);
+    };
+
+
+    $scope.ajouter_charge = function() {
+
+                        var new_charge={"nameCharge":$scope.data.nom_charge,"montant":$scope.data.montant_charge};
+                        $http.post('api/v1/colocs/'+$scope.coloc.name+'/charges',new_charge);
+                        //$http.get('api/v1/colocs/'+$scope.coloc.name).success(function(data){
+                            //$rootScope.coloc=data;
+                        $scope.coloc.charges.push(new_charge);
+
+            //});
+    };
         $scope.nb_users = nb_users;
 
   $scope.orderProp = 'name';

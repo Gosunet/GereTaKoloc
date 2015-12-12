@@ -35,6 +35,7 @@ angular.module('app.services', [])
 });
 
 
+
 // .service('CalendarService', function ($http, $q){
 //   return({
 //     getEvents : getEvents,

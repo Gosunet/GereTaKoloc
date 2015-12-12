@@ -109,9 +109,7 @@ public class ColocService {
         Regle regle = new Gson().fromJson(body, Regle.class);
         datastore.save(regle);
 
-        final Query<Coloc> queryOne = datastore.createQuery(Coloc.class);
-        Coloc coloc= datastore.findAndDelete(queryOne.filter("name =", nameColoc));
-
+        Coloc coloc= find(nameColoc);
         coloc.addRegle(regle);
         datastore.save(coloc);
     }
@@ -147,8 +145,7 @@ public class ColocService {
         Note note = new Gson().fromJson(body, Note.class);
         datastore.save(note);
 
-        final Query<Coloc> queryOne = datastore.createQuery(Coloc.class);
-        Coloc coloc= datastore.findAndDelete(queryOne.filter("name =", nameColoc));
+        Coloc coloc = find(nameColoc);
 
         coloc.addNote(note);
         datastore.save(coloc);

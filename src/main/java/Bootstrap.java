@@ -29,7 +29,7 @@ public class Bootstrap {
 
         morphia.mapPackage("model");
 
-        final Datastore datastore2 = morphia.createDatastore(new MongoClient("localhost"),"geretacolocV39");
+        final Datastore datastore2 = morphia.createDatastore(new MongoClient("localhost"),"geretacolocV40");
         datastore2.ensureIndexes();
 
         final User user = new User("jean","dujardin",100,"cacao2","1234","jean@dujardin.fr");
@@ -45,7 +45,7 @@ public class Bootstrap {
         final Regle regle1 = new Regle("pas de chaussure","0");
         datastore2.save(regle1);
 
-        final Note note1 = new Note("Yoloooo",new Date());
+        final Note note1 = new Note("Yoloooo","3 decembre");
         datastore2.save(note1);
 
         final Coloc coloc = new Coloc("32 rue du machin", user,"cooloc");
