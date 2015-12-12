@@ -20,34 +20,36 @@ angular.module('app.controllers', [])
                     template: 'Veuillez vérifier vos identifiants!'
                 });
             }
-            /*LoginService.loginUser.username, $scope.data.passwordata.password)
-             .success(function (data) {
-             $state.go('home');
-             })
-             .error(function (data) {
-             var alertPopup = $ionicPopup.alert({
-             title: 'Echec authentifiacation!',
-             template: 'Veuillez vérifier vos identifiants!'
-             });
-             });
-             });*/
         });
 
     }
 })
-
 // Controller pour l'inscription
-.controller('signupCtrl', function($scope) {
+.controller('signupCtrl', function($scope,$state,$http) {
+    $scope.data = {};
 
-})
+    $scope.signUp = function () {
+        $http.get('api/v1/colocs/'+$scope.colocName).success(function(data){
+            if (data!="null"){ //creé un user
 
-.controller('homeCtrl', function($scope) {
-
-})
-
-.controller('regleCtrl', function($scope, $rootScope){
-    $scope.data = $rootScope.coloc;
-
+                var new_user = {"login":$scope.userLogin,"name":$scope.userFirstName,"surname":$scope.userLastName,"mdp":$scope.userMdp,"mail":$scope.userMail};
+                $http.post('api/v1/colocs/'+$scope.colocName+'/users',new_user).success(function()
+                {
+                $state.go('login');
+                });
+            }
+            else { // creer une coloc et un user
+                var new_user = {"login":$scope.userLogin,"name":$scope.userFirstName,"surname":$scope.userLastName,"mdp":$scope.userMdp,"mail":$scope.userMail};
+                var new_coloc = {"name":$scope.colocName,"address":$scope.colocAdresse};
+                $http.post('api/v1/colocs',new_coloc).success(function(){
+                    $http.post('api/v1/colocs/'+$scope.colocName+'/users',new_user).success(function()
+                    {
+                        $state.go('login');
+                    });
+                });
+            }
+        });
+    }
 
 })
 
@@ -57,55 +59,6 @@ angular.module('app.controllers', [])
       $ionicSideMenuDelegate.toggleLeft();
     };
 })
-
-
-.controller('TachesCtrl', function($scope) {
-
-
-})
-
-
-.controller('ChargesCtrl', function($scope,$http, $ionicPopup,$rootScope) {
-
-    $scope.data=$rootScope.coloc;
-
-  $scope.showPopup_ajouter_charge = function() {
-    // console.log(data)
-
-      //$http.get('api/v1/colocs/'+$rootScope.data.name).success(function (coloc) {
-       //   $rootScope.coloc = coloc;
-      //});
-
-
-    var popupCharge = $ionicPopup.show({
-      template:'Entrer le nom de la charge<input "type=text" ng-model="data.nom_charge"> <br> Entrer le montant de la charge <input "type=text" ng-model="data.montant_charge" >',
-      subtitle:'Une fois ajouter, vous pourrez supprimer cette charge à tout moment',
-      title:'Entrer les informations sur la nouvelle charge',
-      scope: $scope,
-      buttons: [
-        {text: 'Annuler'},
-        {
-          text: '<b>Ajouter</b>',
-          type: '',
-          onTap: function(e){
-
-              var new_charge={"nameCharge":$scope.data.nom_charge,"montant":$scope.data.montant_charge};
-              $http.post('api/v1/colocs/'+$scope.data.name+'/charges',new_charge);
-
-              popupCharge.close();
-
-
-          }
-        }
-      ]});
-    };
-
-    // $timeout(function() {
-    //   popupCharge.close(); //close the popup after 3 seconds for some reason
-    // }, 1000000);
-
-})
-
 
 .controller('ColocListCtrl', function($scope, $rootScope, $http) {
         // console.log(data)

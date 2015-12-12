@@ -81,8 +81,6 @@ public class ColocService {
         datastore.save(user);
 
         Coloc coloc = find(nameColoc);
-        final Query<Coloc> queryOne = datastore.createQuery(Coloc.class);
-        datastore.findAndDelete(queryOne.filter("name =", nameColoc));
         coloc.addUsers(user);
         datastore.save(coloc);
         //
