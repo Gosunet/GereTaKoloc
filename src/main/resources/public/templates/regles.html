@@ -10,18 +10,16 @@
     <div class="spacer" style="height: 40px;"></div>
 
 
-    <div class="item item-input">
-      <label class="item-input-wrapper">
-        <input type="text" placeholder="Insérer une nouvelle règle de vie" ng-model="data.nouvelle_regle">
+      <div class="bar bar-header item-input-inset">
+          <label class="item-input-wrapper">
+              <input type="text" placeholder="Insérer une nouvelle règle de vie" ng-model="data.nouvelle_regle">
       </label>
-      <a class="button button-small button-energized" ng-click="ajouterRegle()" >
-        Ajouter
-      </a>
+        <a class="button button-small ion-plus button-positive" style="border-radius:2px" ng-click="ajouterRegle()"></a>
       </div>
-    </div>
 
     <ion-list show-delete="shouldShowDelete" show-reorder="shouldShowReorder" >
       <ion-item class="regle" ng-repeat="regle in coloc.regles " type="item-text-wrap">
+        <div class="button-delete ion-close-circled" ng-click="deleteRegle(regle)"></div>
           <div><p id="Numero-regle">{{regle.number}} :</p> <p id="Content-regle"> {{regle.content}}</p></div>
 
         <!-- <ion-delete-button class="ion-minus-circled" ng-click="colocataires.splice($index, 1)"></ion-delete-button> -->

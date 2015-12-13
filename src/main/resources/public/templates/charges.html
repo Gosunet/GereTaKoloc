@@ -14,18 +14,19 @@
             <input type="text" placeholder="Nom de la charge" ng-model="data.nom_charge">
           </label>
           <label class="item-input-wrapper">
-            <input type="text" placeholder="Montant de la charge" ng-model="data.montant_charge">
+            <input type="tel" placeholder="Montant de la charge" ng-model="data.montant_charge" required>
           </label>
           <button class="button button-small ion-plus button-positive" ng-click="ajouter_charge()" >
           </button>
         </div>
           <ion-list class="charges" show-delete="shouldShowDelete" show-reorder="shouldShowReorder" >
             <ion-item class="charge" ng-repeat="charge in coloc.charges " type="item-text-wrap">
+              <span>
+                <div class="button-delete button-small button-light ion-trash-a" ng-click="deleteCharge(charge)"></div>
                 <h2 class="charges-name">{{charge.nameCharge}}</h2>
                 <h3 class="charges-montant">{{charge.montant}} €</h3>
-
-
               <!-- <ion-delete-button class="ion-minus-circled" ng-click="colocataires.splice($index, 1)"></ion-delete-button> -->
+              </span>
             </ion-item>
           </ion-list>
 

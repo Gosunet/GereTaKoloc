@@ -9,9 +9,7 @@ import spark.Route;
 
 import java.util.HashMap;
 
-import static spark.Spark.get;
-import static spark.Spark.post;
-import static spark.Spark.put;
+import static spark.Spark.*;
 
 public class ColocResource {
 
@@ -84,6 +82,9 @@ public class ColocResource {
             return response;
         });
 
+        delete(API_CONTEXT + "/colocs/:name/regles/:nb",(request, response) ->
+            colocService.deleteRegle(request.params(":name"),request.params(":nb")),new JsonTransformer());
+
         //NOTE
 
         get(API_CONTEXT + "/colocs/:name/notes", "application/json", (request, response) ->
@@ -95,6 +96,9 @@ public class ColocResource {
             return response;
         });
 
+        delete(API_CONTEXT + "/colocs/:name/notes/:index","application.json", (request, response) ->
+            colocService.deleteNote(request.params(":name"),request.params(":index")), new JsonTransformer());
+
         //TACHE
         get(API_CONTEXT + "/colocs/:name/users/:user/taches", "application/json", (request, response) ->
             colocService.findTaches(request.params(":name"),request.params(":user")), new JsonTransformer());
@@ -104,7 +108,12 @@ public class ColocResource {
             response.status(201);
             return response;
         });
-        //TODO delete
+
+        delete(API_CONTEXT + "colocs/:name/users/:user/taches/:index", "application/json", (request, response) ->
+            colocService.deleteTache(request.params(":name"), request.params(":user"), request.params(":index")),new JsonTransformer());
+
+        get(API_CONTEXT + "/colocs/:name/charges/delete/:index", (request, response) ->
+            colocService.deleteCharge(request.params(":name"),request.params(":index")),new JsonTransformer());
 
         //CHARGE
 
@@ -116,6 +125,10 @@ public class ColocResource {
             response.status(201);
             return response;
         });
+
+        delete(API_CONTEXT + "/colocs/:name/charges/:index", (request, response) ->
+                colocService.deleteCharge(request.params(":name"),request.params(":index")),new JsonTransformer());
+
 
     }
 }

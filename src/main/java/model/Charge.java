@@ -11,7 +11,7 @@ import org.mongodb.morphia.annotations.Id;
 public class Charge {
 
     @Id
-    private ObjectId id = new ObjectId();
+    private ObjectId id;
     private String nameCharge;
     private String montant;
 
@@ -24,6 +24,7 @@ public class Charge {
     public Charge(String nameCharge, String montant) {
         this.nameCharge = nameCharge;
         this.montant = montant;
+        this.id = new ObjectId();
     }
 
     public ObjectId getId() {

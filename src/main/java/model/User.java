@@ -49,11 +49,12 @@ public class User {
         this.name="noName";
         this.login="toto";
         this.surname="null";
-        this.color=256;
-        this.avatar="default";
+        this.color=100;
+        this.avatar="/colocataires/img/titile.jpg";
         this.mdp="azerty";
         this.description="";
         this.mail="";
+        this.taches=null;
     }
 
     public String getName() {

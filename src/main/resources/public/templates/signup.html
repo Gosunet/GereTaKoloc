@@ -1,29 +1,37 @@
 <ion-view title="Signup">
-    <ion-content padding="'true'" scroll="false" class="has-header">
+    <ion-content padding="'true'" scroll="false" class="has-header" ng-controller="signupCtrl">
         <form class="list">
             <ion-list>
                 <label class="item item-input">
-                    <span class="input-label">Name</span>
-                    <input type="text" placeholder="">
+                    <span class="input-label">Prénom</span>
+                    <input type="text" placeholder="" ng-model="userFirstName">
                 </label>
                 <label class="item item-input">
-                    <span class="input-label">Username</span>
-                    <input type="text" placeholder="">
+                    <span class="input-label">Nom</span>
+                    <input type="text" placeholder="" ng-model="userLastName">
                 </label>
                 <label class="item item-input">
-                    <span class="input-label">Password</span>
-                    <input type="text" placeholder="">
+                    <span class="input-label">Pseudo</span>
+                    <input type="text" placeholder="" ng-model="userLogin">
+                </label>
+                <label class="item item-input">
+                    <span class="input-label">Mot de passe</span>
+                    <input type="password" placeholder="" ng-model="userMdp">
                 </label>
                 <label class="item item-input">
                     <span class="input-label">E-mail</span>
-                    <input type="email" placeholder="">
+                    <input type="email" placeholder="" ng-model="userMail">
                 </label>
             </ion-list>
             <label class="item item-input">
-                <span class="input-label">Colocation name</span>
-                <input type="text" placeholder="">
+                <span class="input-label">Nom de la colocation</span>
+                <input type="text" placeholder="" ng-model="colocName">
             </label>
-            <button class="button button-stable button-block ">Sign up</button>
+            <label class="item item-input">
+                <span class="input-label">Adresse de la colocation</span>
+                <input type="text" placeholder="" ng-model="colocAdresse">
+            </label>
+            <button class="button button-stable button-block " ng-click="signUp()">Sign up</button>
         </form>
     </ion-content>
 </ion-view>
