@@ -77,6 +77,74 @@ angular.module('app.controllers', [])
             angular.forEach($scope.coloc.users, function (value, key) {
                 nb_users++;
             });
+            //Tache
+            $scope.showAjoutTache = false;
+            $scope.showCard = function(){
+                $scope.showAjoutTache = true;
+            };
+
+            $scope.hideCard = function(){
+                $scope.showAjoutTache = false;
+            };
+
+            $scope.ajouter_tache = function(){
+            };
+
+            var tache_lundi = [];
+            var tache_mardi = [];
+            var tache_mercredi = [];
+            var tache_jeudi = [];
+            var tache_vendredi = [];
+            var tache_samedi = [];
+            var tache_dimanche = [];
+
+            angular.forEach($scope.coloc.users, function(value,key){
+                // console.log(value);
+                angular.forEach(value.taches, function(value2,key2){
+                    var date = new Date(value2.date);
+                    var day=date.getDay();
+                    console.log(day);
+
+                    // if(date[10]=="M"){
+                    if(day==1){
+                        tache_lundi.push(value2);
+                    }
+                    // else if(date[10]=="T"){
+                    else if(day==2){
+                        tache_mardi.push(value2);
+                    }
+                    // else if(date[10]=="W"){
+                    else if(day==3){
+
+                        tache_mercredi.push(value2);
+                    }
+                    // else if(date[10]=="B"){
+                    else if(day==4){
+                        tache_jeudi.push(value2);
+                    }
+                    // else if(date[10]=="F"){
+                    else if(day==5){
+                        tache_vendredi.push(value2);
+                    }
+                    // else if(date[10]=="S"){
+                    else if(day==6){
+                        tache_samedi.push(value2);
+                    }
+                    // else if(date[10]=="S"){
+                    else if(day==0){
+                        tache_dimanche.push(value2);
+                    }
+                    $scope.lun_task=tache_lundi;
+                    $scope.mar_task=tache_mardi;
+                    $scope.mer_task=tache_mercredi;
+                    $scope.jeu_task=tache_jeudi;
+                    $scope.ven_task=tache_vendredi;
+                    $scope.sam_task=tache_samedi;
+                    $scope.dim_task=tache_dimanche;
+                })
+            });
+
+    //Fonction
 
     $scope.ajouterRegle = function (){
 
@@ -107,12 +175,48 @@ angular.module('app.controllers', [])
                         //$http.get('api/v1/colocs/'+$scope.coloc.name).success(function(data){
                             //$rootScope.coloc=data;
                         $scope.coloc.charges.push(new_charge);
+                        var charge_totale = 0;
+                        var charge_pers = 0;
+
+                        angular.forEach($scope.coloc.charges, function (value, key) {
+                            charge_totale += parseFloat(value.montant, 10);
+                        });
+                        $scope.montant_total = charge_totale;
 
             //});
     };
+
+    $scope.deleteCharge = function (charge) {
+        var index = $scope.coloc.charges.indexOf(charge);
+        $http.delete('api/v1/colocs/'+$scope.coloc.name +'/charges/'+index).success(function(data){
+            $scope.coloc=data;
+            var charge_totale = 0;
+            var charge_pers = 0;
+
+            angular.forEach($scope.coloc.charges, function (value, key) {
+                charge_totale += parseFloat(value.montant, 10);
+            });
+            $scope.montant_total = charge_totale;
+        });
+    };
+
+    $scope.deleteRegle = function(regle){
+        var index =$scope.coloc.regles.indexOf(regle);
+        $http.delete('api/v1/colocs/'+$scope.coloc.name + '/regles/'+index).success(function(data){
+            $scope.coloc=data;
+        });
+
+    };
+
+    $scope.deleteNote = function(note){
+        var index = $scope.coloc.notes.indexOf(note);
+        $http.delete('api/v1/colocs/' + $scope.coloc.name + '/notes/' + index).success(function(data){
+            $scope.coloc=data;
+        });
+    };
         $scope.nb_users = nb_users;
 
-  $scope.orderProp = 'name';
+         $scope.orderProp = 'name';
 
 });
 // .controller("CalendarEventController", function ($scope, EventService) {

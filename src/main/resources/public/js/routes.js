@@ -51,7 +51,7 @@ angular.module('app.routes', [])
     .state('taches', {
       url: '/menu/taches',
       templateUrl: 'templates/taches.html',
-      controller: 'TachesCtrl'
+      controller: 'ColocListCtrl'
     })
 
       .state('regles', {

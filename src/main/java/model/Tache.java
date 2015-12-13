@@ -15,14 +15,15 @@ public class Tache {
     @Id
     private ObjectId id = new ObjectId();
     private String content;
-    private Date createdOn = new Date();
+    private Date date = new Date();
     private boolean urgency;
     private boolean done;
+    private String heure;
 
     public Tache(String content, Date createdOn, boolean urgency) {
         this.id= new ObjectId();
         this.content = content;
-        this.createdOn = createdOn;
+        this.date = createdOn;
         this.urgency = urgency;
         this.done = false;
     }
@@ -32,9 +33,10 @@ public class Tache {
     private Tache(){
         this.id=new ObjectId();
         this.content="nope";
-        this.createdOn = null;
+        this.date = null;
         this.urgency=false;
         this.done=false;
+        this.heure = "";
     }
 
     public String getContent() {
@@ -46,11 +48,11 @@ public class Tache {
     }
 
     public Date getCreatedOn() {
-        return createdOn;
+        return date;
     }
 
     public void setCreatedOn(Date createdOn) {
-        this.createdOn = createdOn;
+        this.date = createdOn;
     }
 
     public boolean isUrgency() {
@@ -75,5 +77,21 @@ public class Tache {
 
     public void setId(ObjectId id) {
         this.id = id;
+    }
+
+    public Date getDate() {
+        return date;
+    }
+
+    public void setDate(Date date) {
+        this.date = date;
+    }
+
+    public String getHeure() {
+        return heure;
+    }
+
+    public void setHeure(String heure) {
+        this.heure = heure;
     }
 }

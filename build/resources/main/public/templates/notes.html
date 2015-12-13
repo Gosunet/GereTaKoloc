@@ -12,10 +12,10 @@
 
           <div class="spacer" style="height: 40px;"></div>
 
-    <div class="item item-input">
-      <label class="item-input-wrapper">
-        <input type="text" placeholder="Ecrivez votre nouvelle note ici" ng-model="data.nouvelle_note">
-      </label>
+      <div class="bar bar-header item-input-inset">
+          <label class="item-input-wrapper">
+              <input type="text" placeholder="Ecrivez votre nouvelle note ici" ng-model="data.nouvelle_note">
+          </label>
       <a class="button button-small ion-plus button-positive" ng-click="ajouterNote()"></a>
 
     </div>
@@ -25,6 +25,7 @@
 
         <div class="item item-divider" id="Header-note">
           {{note.date}}
+            <div class="button-delete button-icon ion-close-circled" ng-click="deleteNote(note)"></div>
         </div>
         <div class="item item-text-wrap" id="Content-note">
           {{note.content}}

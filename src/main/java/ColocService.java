@@ -4,11 +4,13 @@ import com.mongodb.DBCollection;
 import model.*;
 import org.bson.types.ObjectId;
 import org.mongodb.morphia.Datastore;
+import org.mongodb.morphia.annotations.Reference;
 import org.mongodb.morphia.query.Query;
 import org.mongodb.morphia.query.UpdateException;
 import org.mongodb.morphia.query.UpdateOperations;
 import org.mongodb.morphia.query.UpdateResults;
 
+import java.nio.file.attribute.UserPrincipalLookupService;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -86,8 +88,6 @@ public class ColocService {
         //
     }
 
-    //TODO Delete User
-
     //REGLE
 
     public List<Regle> findRegles(String nameColoc){
@@ -112,26 +112,24 @@ public class ColocService {
         datastore.save(coloc);
     }
 
-    public List<Regle> deleteRegle(String nameColoc, String nbRegle){
+    public Coloc deleteRegle(String nameColoc, String index){
+
+        Coloc coloc = find(nameColoc);
+
         final Query<Coloc> queryOne = datastore.createQuery(Coloc.class);
-        Coloc coloc= datastore.findAndDelete(queryOne.filter("name =", nameColoc));
+        datastore.delete(queryOne.filter("name =",nameColoc));
 
+        final Query<Regle> queryRegle = datastore.createQuery((Regle.class));
         List<Regle> regles = coloc.getRegles();
-        int i=0;
-        for (Regle regle: regles){
-            if (regle.getNumber().equals(nbRegle)){
-                regles.remove(i);
-            }
-            i++;
-        }
+        Regle regle = regles.get(Integer.parseInt(index));
+        datastore.delete(queryRegle.filter("_id =", regle.getId()));
+        regles.remove(Integer.parseInt(index));
 
-        datastore.save(regles);
         coloc.setRegles(regles);
         datastore.save(coloc);
-        return regles;
+        return coloc;
     }
 
-    //TODO teste delete regle
 
     //NOTE
 
@@ -149,7 +147,25 @@ public class ColocService {
         datastore.save(coloc);
     }
 
-    //TODO delete tache
+    public Coloc deleteNote(String nameColoc, String index){
+
+        Coloc coloc = find(nameColoc);
+
+        final Query<Coloc> queryOne = datastore.createQuery(Coloc.class);
+        datastore.delete(queryOne.filter("name =",nameColoc));
+
+        final Query<Note> queryNotes = datastore.createQuery((Note.class));
+        List<Note> notes = coloc.getNotes();
+        Note note = notes.get(Integer.parseInt(index));
+        datastore.delete(queryNotes.filter("_id =", note.getId()));
+        notes.remove(Integer.parseInt(index));
+
+        coloc.setNotes(notes);
+        datastore.save(coloc);
+        return coloc;
+    }
+
+
 
     //TACHE
 
@@ -168,7 +184,35 @@ public class ColocService {
 
     }
 
-    //TODO charges
+    public Coloc deleteTache(String nameColoc, String nameUser, String index){
+
+        Coloc coloc = find(nameColoc);
+
+        final Query<Coloc> queryOne = datastore.createQuery(Coloc.class);
+        datastore.delete(queryOne.filter("name =",nameColoc));
+
+        User user = findOneUser(nameColoc,nameUser);
+        final Query<User> queryUser = datastore.createQuery(User.class);
+        datastore.delete(queryUser.filter("login =", nameUser));
+        List<User> users = coloc.getUsers();
+        users.remove(user);
+
+
+        final Query<Tache> queryTache = datastore.createQuery((Tache.class));
+        List<Tache>  taches = user.getTaches();
+        Tache tache = taches.get(Integer.parseInt(index));
+        datastore.delete(queryTache.filter("_id =", tache.getId()));
+        taches.remove(Integer.parseInt(index));
+
+        user.setTaches(taches);
+        users.add(user);
+        coloc.setUsers(users);
+
+        datastore.save(coloc);
+        return coloc;
+    }
+
+   //CHARGE
 
     public List<Charge> findCharges(String nameColoc){
         return find(nameColoc).getCharges();
@@ -182,6 +226,24 @@ public class ColocService {
         coloc.addCharge(charge);
         datastore.save(coloc);
 
+    }
+
+    public Coloc deleteCharge(String nameColoc, String index){
+
+        Coloc coloc = find(nameColoc);
+
+        final Query<Coloc> queryOne = datastore.createQuery(Coloc.class);
+        datastore.delete(queryOne.filter("name =",nameColoc));
+
+        final Query<Charge> queryCharge = datastore.createQuery((Charge.class));
+        List<Charge> charges = coloc.getCharges();
+        Charge charge = charges.get(Integer.parseInt(index));
+        datastore.delete(queryCharge.filter("_id =", charge.getId()));
+        charges.remove(Integer.parseInt(index));
+
+        coloc.setCharges(charges);
+        datastore.save(coloc);
+        return coloc;
     }
 
 }
