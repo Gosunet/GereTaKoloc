@@ -67,11 +67,11 @@ public class ColocService {
         return find(nameColoc).getUsers();
     }
 
-    public User findOneUser(String nameColoc, String nameUser){
+    public User findOneUser(String nameColoc, String login){
         List<User> users = find(nameColoc).getUsers();
         for (User user : users)
         {
-        if(user.getName().equals(nameUser)){
+        if(user.getLogin().equals(login)){
             return user;
         }
         }
@@ -184,31 +184,31 @@ public class ColocService {
 
     }
 
-    public Coloc deleteTache(String nameColoc, String nameUser, String index){
+    public Coloc deleteTache(String nameColoc, String nameUser, String nomEvent){
 
         Coloc coloc = find(nameColoc);
 
-        final Query<Coloc> queryOne = datastore.createQuery(Coloc.class);
-        datastore.delete(queryOne.filter("name =",nameColoc));
-
-        User user = findOneUser(nameColoc,nameUser);
-        final Query<User> queryUser = datastore.createQuery(User.class);
-        datastore.delete(queryUser.filter("login =", nameUser));
-        List<User> users = coloc.getUsers();
-        users.remove(user);
-
-
-        final Query<Tache> queryTache = datastore.createQuery((Tache.class));
-        List<Tache>  taches = user.getTaches();
-        Tache tache = taches.get(Integer.parseInt(index));
-        datastore.delete(queryTache.filter("_id =", tache.getId()));
-        taches.remove(Integer.parseInt(index));
-
-        user.setTaches(taches);
-        users.add(user);
-        coloc.setUsers(users);
-
-        datastore.save(coloc);
+//        final Query<Coloc> queryOne = datastore.createQuery(Coloc.class);
+//        datastore.delete(queryOne.filter("name =",nameColoc));
+//
+//        User user = findOneUser(nameColoc,nameUser);
+//        final Query<User> queryUser = datastore.createQuery(User.class);
+//        datastore.delete(queryUser.filter("login =", nameUser));
+//        List<User> users = coloc.getUsers();
+//        users.remove(user);
+//
+//
+//        final Query<Tache> queryTache = datastore.createQuery((Tache.class));
+//        List<Tache>  taches = user.getTaches();
+//        Tache tache = datastore.findAndDelete(queryTache.filter("content =", nomEvent));
+//
+//        taches.remove(tache);
+//
+//        user.setTaches(taches);
+//        users.add(user);
+//        coloc.setUsers(users);
+//
+//        datastore.save(coloc);
         return coloc;
     }
 

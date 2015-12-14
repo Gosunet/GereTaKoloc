@@ -13,6 +13,7 @@ angular.module('app.controllers', [])
             if (data!="null") {
                 $rootScope.coloc = data;
                 $state.go('home')
+                $rootScope.userName=$scope.data.username;
             }
             else {
                 var alertPopup = $ionicPopup.alert({
@@ -87,9 +88,6 @@ angular.module('app.controllers', [])
                 $scope.showAjoutTache = false;
             };
 
-            $scope.ajouter_tache = function(){
-            };
-
             var tache_lundi = [];
             var tache_mardi = [];
             var tache_mercredi = [];
@@ -98,12 +96,40 @@ angular.module('app.controllers', [])
             var tache_samedi = [];
             var tache_dimanche = [];
 
+            var monthNames = [
+                "Janvier", "Février", "Mars",
+                "Avril", "Mai", "Juin", "Juillet",
+                "Aout", "Septembre", "Octobre",
+                "Novembre", "Decembre"
+            ];
+
+
             angular.forEach($scope.coloc.users, function(value,key){
                 // console.log(value);
                 angular.forEach(value.taches, function(value2,key2){
                     var date = new Date(value2.date);
                     var day=date.getDay();
-                    console.log(day);
+                    var jour = date.getDate();
+                    var monthIndex = date.getMonth();
+                    var year = date.getFullYear();
+
+                    var hour = new Date(value2.hour);
+                    var heure= hour.getHours();
+                    var minute=hour.getMinutes();
+
+                    if (heure<10){
+                        heure = "0"+heure;
+                    }
+                    if (minute<10){
+                        minute="0"+ minute;
+                    }
+                    var full_hour = heure+":"+minute;
+
+                    $scope.hour = full_hour;
+
+                    var date_complet = jour+"-"+monthNames[monthIndex]+"-"+year;
+
+                    $scope.date_comp=date_complet;
 
                     // if(date[10]=="M"){
                     if(day==1){
@@ -145,6 +171,100 @@ angular.module('app.controllers', [])
             });
 
     //Fonction
+
+    $scope.ajouter_tache = function(){
+        var new_tache={"content":$scope.nom_evt,"date":$scope.date,"heure":$scope.hour,"urgency":$scope.urgency};
+        console.log($scope.date);
+        console.log($scope.hour);
+
+
+        $http.post('api/v1/colocs/'+$scope.coloc.name+'/users/'+$rootScope.userName+'/taches',new_tache);
+            $scope.coloc.users[0].taches.push(new_tache); // à ajouter à l'user correspondant plus tard. Ne se met pas à jour ????
+
+            //Pour mettre à jour les jours du scope, à mettre dans une fonction.
+            var tache_lundi = [];
+            var tache_mardi = [];
+            var tache_mercredi = [];
+            var tache_jeudi = [];
+            var tache_vendredi = [];
+            var tache_samedi = [];
+            var tache_dimanche = [];
+
+            var monthNames = [
+                "Janvier", "Février", "Mars",
+                "Avril", "Mai", "Juin", "Juillet",
+                "Aout", "Septembre", "Octobre",
+                "Novembre", "Decembre"
+            ];
+
+
+            angular.forEach($scope.coloc.users, function(value,key){
+                // console.log(value);
+                angular.forEach(value.taches, function(value2,key2){
+                    var date = new Date(value2.date);
+                    var day=date.getDay();
+                    var jour = date.getDate();
+                    var monthIndex = date.getMonth();
+                    var year = date.getFullYear();
+
+                    var hour = new Date(value2.hour);
+                    var heure= hour.getHours();
+                    var minute=hour.getMinutes();
+
+                    if (heure<10){
+                        heure = "0"+heure;
+                    }
+                    if (minute<10){
+                        minute="0"+ minute;
+                    }
+                    var full_hour = heure+":"+minute;
+
+                    $scope.hour = full_hour;
+
+                    var date_complet = jour+"-"+monthNames[monthIndex]+"-"+year;
+
+                    $scope.date_comp=date_complet;
+
+                    // if(date[10]=="M"){
+                    if(day==1){
+                        tache_lundi.push(value2);
+                    }
+                    // else if(date[10]=="T"){
+                    else if(day==2){
+                        tache_mardi.push(value2);
+                    }
+                    // else if(date[10]=="W"){
+                    else if(day==3){
+
+                        tache_mercredi.push(value2);
+                    }
+                    // else if(date[10]=="B"){
+                    else if(day==4){
+                        tache_jeudi.push(value2);
+                    }
+                    // else if(date[10]=="F"){
+                    else if(day==5){
+                        tache_vendredi.push(value2);
+                    }
+                    // else if(date[10]=="S"){
+                    else if(day==6){
+                        tache_samedi.push(value2);
+                    }
+                    // else if(date[10]=="S"){
+                    else if(day==0){
+                        tache_dimanche.push(value2);
+                    }
+                    $scope.lun_task=tache_lundi;
+                    $scope.mar_task=tache_mardi;
+                    $scope.mer_task=tache_mercredi;
+                    $scope.jeu_task=tache_jeudi;
+                    $scope.ven_task=tache_vendredi;
+                    $scope.sam_task=tache_samedi;
+                    $scope.dim_task=tache_dimanche;
+                })
+            });
+
+    };
 
     $scope.ajouterRegle = function (){
 
@@ -213,6 +333,14 @@ angular.module('app.controllers', [])
         $http.delete('api/v1/colocs/' + $scope.coloc.name + '/notes/' + index).success(function(data){
             $scope.coloc=data;
         });
+    };
+
+    $scope.deleteTache = function(task){
+
+        $http.delete('api/v1/colocs/'+ $scope.coloc.name + '/users/' + $rootScope.userName +'/taches/' + task.content).success(function(data){
+            $scope.coloc=data;
+        })
+
     };
         $scope.nb_users = nb_users;
 
