@@ -24,7 +24,7 @@
       <div class="note" ng-repeat="note in coloc.notes" type="item-text-wrap">
 
         <div class="item item-divider" id="Header-note">
-          {{note.date}}
+            {{note.date | date:"dd-MM-yyyy 'à' h:mma"}}
             <div class="button-delete button-icon ion-close-circled" ng-click="deleteNote(note)"></div>
         </div>
         <div class="item item-text-wrap" id="Content-note">

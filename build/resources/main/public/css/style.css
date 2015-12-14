@@ -1,6 +1,10 @@
 /* Empty. Add your own CSS if you like */
 
+.button-delete{
+    float: right;
+}
 
+/*home page*/
 .user-thumbs {
   float: left;
   padding: 0.25em;
@@ -60,30 +64,24 @@ h2.titre-projet {
     font-size:15px;
 }
 
-.button-delete{
-  float: right;
-}
-
 .Charge-tot-pers{
-  padding-right: 45px;
-  font-style: italic;
-  font-weight: bold;
-  font-size:15px;
+    padding-right: 45px;
+    font-style: italic;
+    font-weight: bold;
+    font-size:15px;
 }
-
 
 p#mont-tot{
-  text-align: right;
-  font-size: 15px;
-  color:grey;
+    text-align: right;
+    font-size: 15px;
+    color:grey;
 }
 
 p#mont-tot-pers{
-  text-align: right;
-  font-size: 1.1em;
-  color:orange;
+    text-align: right;
+    font-size: 1.1em;
+    color:orange;
 }
-
 /*Style dans le fichier regle.html*/
 p#Numero-regle{
   float: left;
@@ -98,6 +96,8 @@ p#Content-regle{
   font-size: 13px;
 }
 
+
+/*style fichier note.html*/
 .note{
   width: auto;
   padding-top: 15px;
@@ -109,31 +109,29 @@ p#Content-regle{
   font-size:29px;
 }
 
-.card-lundi{
-    float:left;
-    text-align: center;
-    font-size: 20px;
-    border: 1px dotted grey;
-    width:50%;
-    height: auto;
-    color:orange;
-
+.task-content{
+    padding:15px;
 }
 
-.card-mardi{
-    float:right;
+.item-urgency{
+    color:red;
+}
+.task{
     text-align: center;
-    font-size: 20px;
-    border: 1px dotted grey;
-    width:50%;
-    height: auto;
-    color:orange;
+    padding-left: 10%;
 }
 
-.card-dimanche{
+.card-task{
+    width:90%;
+}
+
+.card-day{
     text-align: center;
     font-size: 20px;
     border: 1px dotted grey;
     color:orange;
     height:auto;
+}
+.check-box{
+    float:right;
 }

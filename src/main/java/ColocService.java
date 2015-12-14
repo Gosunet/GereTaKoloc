@@ -184,31 +184,34 @@ public class ColocService {
 
     }
 
-    public Coloc deleteTache(String nameColoc, String nameUser, String nomEvent){
+    public Coloc deleteTache(String nameColoc, String login, String nomEvent){
+
 
         Coloc coloc = find(nameColoc);
+        datastore.delete(coloc);
+        List<User> users = coloc.getUsers();
+        Tache tacheToRemoved=null;
 
-//        final Query<Coloc> queryOne = datastore.createQuery(Coloc.class);
-//        datastore.delete(queryOne.filter("name =",nameColoc));
-//
-//        User user = findOneUser(nameColoc,nameUser);
-//        final Query<User> queryUser = datastore.createQuery(User.class);
-//        datastore.delete(queryUser.filter("login =", nameUser));
-//        List<User> users = coloc.getUsers();
-//        users.remove(user);
-//
-//
-//        final Query<Tache> queryTache = datastore.createQuery((Tache.class));
-//        List<Tache>  taches = user.getTaches();
-//        Tache tache = datastore.findAndDelete(queryTache.filter("content =", nomEvent));
-//
-//        taches.remove(tache);
-//
-//        user.setTaches(taches);
-//        users.add(user);
-//        coloc.setUsers(users);
-//
-//        datastore.save(coloc);
+        for (User user: users){
+            List<Tache> taches = user.getTaches();
+            for (Tache tache : taches){
+                if(tache.getContent().equals(nomEvent)){
+                    tacheToRemoved=tache;
+                }
+                else{
+                    datastore.save(tache);
+                }
+            }
+            if(tacheToRemoved!=null)
+            {
+                taches.remove(tacheToRemoved);
+            }
+            user.setTaches(taches);
+            datastore.save(user);
+        }
+        coloc.setUsers(users);
+        datastore.save(coloc);
+
         return coloc;
     }
 

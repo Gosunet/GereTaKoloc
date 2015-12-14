@@ -103,7 +103,7 @@ public class ColocResource {
         get(API_CONTEXT + "/colocs/:name/users/:user/taches", "application/json", (request, response) ->
             colocService.findTaches(request.params(":name"),request.params(":user")), new JsonTransformer());
 
-        post(API_CONTEXT + "", "application/json", (request, response) -> {
+        post(API_CONTEXT + "/colocs/:name/users/:user/taches", "application/json", (request, response) -> {
             colocService.addTache(request.params(":name"),request.params(":user"),request.body());
             response.status(201);
             return response;

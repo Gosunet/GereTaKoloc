@@ -17,12 +17,12 @@
                         <input type="text" placeholder="Evenement" ng-model="nom_evt">
                     </label>
             <label class="item item-input">
-                <input type="Date" placeholder="Date" ng-model="date">
+                <input type="Date" placeholder="yyyy-mm-dd" ng-model="date">
             </label>
             <label class="item item-input">
-                <input type="Time" placeholder="Hour" ng-model="hour">
+                <input type="Time" placeholder="hh:mm" ng-model="hour">
             </label>
-                    <ion-checkbox dark ng-model="task_urgency" ng-model="urgency" style="font-size:15px">Urgent</ion-checkbox >
+                    <ion-checkbox dark ng-model="urgency" style="font-size:15px">Urgent</ion-checkbox >
 
                 </div>
                 <div class="button-bar">
@@ -33,92 +33,95 @@
         </div>
         <div class="spacer" style="height: 40px;"></div>
 
-            <div class="card card-lundi">
-                <div class="item item-dark item-divider">Lundi</div>
-                <div class="task" ng-repeat="task in lun_task">
-                    <div class="card">
+        <div class="card card-day">
+            <div class="item item-dark item-divider">Lundi</div>
+            <div class="task" ng-repeat="task in lun_task">
+                <div class="card card-task">
+                    <div class="item item-divider">{{task.date | date:"dd-MM-yyyy"}} {{task.heure | date:"hh:mma"}}
                         <div class="button-delete button-icon ion-close-circled" ng-click="deleteTache(task)"></div>
-                        <div>{{task.content}}</div>
-                        <div>{{task.date}} {{task.heure}}</div>
-                        <div>{{task.urgency}}</div>
-                        <ion-checkbox class="check-box" ng-model="task_urgency"></ion-checkbox>
                     </div>
+                    <div class="task-content">{{task.content}}</div>
+                    <div class="item item-assertive item-divider" ng-show="{{task.urgency}}">Urgent</div>
                 </div>
             </div>
+        </div>
 
-            <div class="card card-mardi">
-                <div class="item item-dark item-divider" >Mardi</div>
-                <div class="task" ng-repeat="task in mar_task">
-                    <div class="card">
+        <div class="card card-day">
+            <div class="item item-dark item-divider" >Mardi</div>
+            <div class="task" ng-repeat="task in mar_task">
+                <div class="card card-task">
+                    <div class="item item-divider">{{task.date | date:"dd-MM-yyyy"}} {{task.heure | date:"hh:mma"}}
                         <div class="button-delete button-icon ion-close-circled" ng-click="deleteTache(task)"></div>
-                        <div>{{task.content}}</div>
-                        <div>{{task.date}} {{task.heure}}</div>
-                        <div>{{task.urgency}}</div>
-                        <ion-checkbox class="check-box" ng-model="task_urgency"></ion-checkbox>
                     </div>
+                    <div class="task-content">{{task.content}}</div>
+                    <div class="item item-assertive item-divider" ng-show="{{task.urgency}}">Urgent</div>
                 </div>
             </div>
+        </div>
 
-            <div class="card card-lundi">
-                <div class="item item-dark item-divider">Mercredi</div>
-                <div class="task" ng-repeat="task in mer_task">
-                    <div class="card">
+        <div class="card card-day">
+            <div class="item item-dark item-divider">Mercredi</div>
+            <div class="task" ng-repeat="task in mer_task">
+                <div class="card card-task">
+                    <div class="item item-divider">{{task.date | date:"dd-MM-yyyy"}} {{task.heure | date:"hh:mma"}}
                         <div class="button-delete button-icon ion-close-circled" ng-click="deleteTache(task)"></div>
-                        <div>{{task.content}}</div>
-                        <div>{{task.date}} {{task.heure}}</div>
-                        <div>{{task.urgency}}</div>
-                        <ion-checkbox class="check-box" ng-model="task_urgency"></ion-checkbox>
                     </div>
+                    <div class="task-content">{{task.content}}</div>
+                    <div class="item item-assertive item-divider" ng-show="{{task.urgency}}">Urgent</div>
                 </div>
             </div>
+        </div>
 
-            <div class="card card-mardi">
-                <div class="item item-dark item-divider">Jeudi</div>
-                <div class="task" ng-repeat="task in jeu_task">
-                    <div class="card">
-                        <div class="button-delete button-icon ion-close-circled" ng-click="deleteTache(task)"></div>
-                        <div>{{task.content}}</div>
-                        <div>{{task.date}} {{task.heure}}</div>
-                        <div>{{task.urgency}}</div>
-                        <ion-checkbox class="check-box" ng-model="task_urgency"></ion-checkbox>
-                    </div>
-                </div>
-            </div>
 
-            <div class="card card-lundi">
-                <div class="item item-dark item-divider">Vendredi</div>
-                <div class="task" ng-repeat="task in ven_task">
-                    <div class="card">
+        <div class="card card-day">
+            <div class="item item-dark item-divider">Jeudi</div>
+            <div class="task" ng-repeat="task in jeu_task">
+                <div class="card card-task">
+                    <div class="item item-divider">{{task.date | date:"dd-MM-yyyy"}} {{task.heure | date:"hh:mma"}}
                         <div class="button-delete button-icon ion-close-circled" ng-click="deleteTache(task)"></div>
-                        <div>{{task.content}}</div>
-                        <div>{{task.date}} {{task.heure}}</div>
-                        <div>{{task.urgency}}</div>
-                        <ion-checkbox class="check-box" ng-model="task_urgency"></ion-checkbox>
                     </div>
+                    <div class="task-content">{{task.content}}</div>
+                    <div class="item item-assertive item-divider" ng-show="{{task.urgency}}">Urgent</div>
                 </div>
             </div>
+        </div>
 
-            <div class="card card-mardi">
-                <div class="item item-dark item-divider">Samedi</div>
-                <div class="task" ng-repeat="task in sam_task">
-                    <div class="card">
+        <div class="card card-day">
+            <div class="item item-dark item-divider">Vendredi</div>
+            <div class="task" ng-repeat="task in ven_task">
+                <div class="card card-task">
+                    <div class="item item-divider">{{task.date | date:"dd-MM-yyyy"}} {{task.heure | date:"hh:mma"}}
                         <div class="button-delete button-icon ion-close-circled" ng-click="deleteTache(task)"></div>
-                        <div>{{task.content}}</div>
-                        <div>{{task.date}} {{task.heure}}</div>
-                        <div>{{task.urgency}}</div>
-                        <ion-checkbox class="check-box" ng-model="task_urgency"></ion-checkbox>
                     </div>
+                    <div class="task-content">{{task.content}}</div>
+                    <div class="item item-assertive item-divider" ng-show="{{task.urgency}}">Urgent</div>
                 </div>
             </div>
-        <div class="card card-dimanche">
+        </div>
+
+        <div class="card card-day">
+            <div class="item item-dark item-divider">Samedi</div>
+            <div class="task" ng-repeat="task in sam_task">
+                <div class="card card-task">
+                    <div class="item item-divider">{{task.date | date:"dd-MM-yyyy"}} {{task.heure | date:"hh:mma"}}
+                        <div class="button-delete button-icon ion-close-circled" ng-click="deleteTache(task)"></div>
+                    </div>
+                    <div class="task-content">{{task.content}}</div>
+                    <div class="item item-assertive item-divider" ng-show="{{task.urgency}}">Urgent</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="card card-day">
             <div class="item item-dark item-divider">Dimanche</div>
             <div class="task" ng-repeat="task in dim_task">
-                <div class="card">
-                    <div class="button-delete button-icon ion-close-circled" ng-click="deleteTache(task)"></div>
-                    <div>{{task.content}}</div>
-                    <div>{{task.date}} {{task.heure}}</div>
-                    <div>{{task.urgency}}</div>
-                    <ion-checkbox class="check-box" ng-model="task_urgency"></ion-checkbox>
+                <div class="card card-task">
+                    <div class="item item item-divider">
+                        {{task.date | date:"dd-MM-yyyy"}} {{task.heure | date:"hh:mma"}}
+                        <div class="button-delete button-icon ion-close-circled" ng-click="deleteTache(task)"></div>
+                    </div>
+                    <div class="task-content">{{task.content}}</div>
+                    <div class="item item-assertive item-divider" ng-show="{{task.urgency}}">Urgent</div>
                 </div>
             </div>
         </div>
