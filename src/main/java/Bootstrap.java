@@ -29,13 +29,13 @@ public class Bootstrap {
 
         morphia.mapPackage("model");
 
-        final Datastore datastore2 = morphia.createDatastore(new MongoClient("localhost"),"geretacolocV41");
+        final Datastore datastore2 = morphia.createDatastore(new MongoClient("localhost"),"geretacolocV42");
         datastore2.ensureIndexes();
 
         final User user = new User("jean","dujardin",100,"cacao2","1234","jean@dujardin.fr");
         final User user2 = new User("jeanddddd","dujardddddin",100,"cadddcao","1ddd234","cacao@enib.fr");
         final User user3 = new User("nicolas","dupont",100,"cacao","4567","pouet@enib.fr");
-        final Tache tache1 = new Tache("écouter chanter ando",new Date(),false);
+        final Tache tache1 = new Tache("écouter chanter ando","12-12-12",false);
         datastore2.save(tache1);
         user.addTache(tache1);
         datastore2.save(user);

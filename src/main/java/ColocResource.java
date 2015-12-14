@@ -103,14 +103,14 @@ public class ColocResource {
         get(API_CONTEXT + "/colocs/:name/users/:user/taches", "application/json", (request, response) ->
             colocService.findTaches(request.params(":name"),request.params(":user")), new JsonTransformer());
 
-        post(API_CONTEXT + "/colocs/:name/users/:user/taches", "application/json", (request, response) -> {
+        post(API_CONTEXT + "", "application/json", (request, response) -> {
             colocService.addTache(request.params(":name"),request.params(":user"),request.body());
             response.status(201);
             return response;
         });
 
-        delete(API_CONTEXT + "colocs/:name/users/:user/taches/:index", "application/json", (request, response) ->
-            colocService.deleteTache(request.params(":name"), request.params(":user"), request.params(":index")),new JsonTransformer());
+        delete(API_CONTEXT + "/colocs/:name/users/:user/taches/:nomEvent", "application/json", (request, response) ->
+            colocService.deleteTache(request.params(":name"), request.params(":user"), request.params(":nomEvent")),new JsonTransformer());
 
         get(API_CONTEXT + "/colocs/:name/charges/delete/:index", (request, response) ->
             colocService.deleteCharge(request.params(":name"),request.params(":index")),new JsonTransformer());
