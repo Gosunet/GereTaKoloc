@@ -29,7 +29,7 @@ public class Bootstrap {
 
         morphia.mapPackage("model");
 
-        final Datastore datastore2 = morphia.createDatastore(new MongoClient("localhost"),"geretacolocV42");
+        final Datastore datastore2 = morphia.createDatastore(new MongoClient("localhost"),"geretacolocV46");
         datastore2.ensureIndexes();
 
         final User user = new User("jean","dujardin",100,"cacao2","1234","jean@dujardin.fr");
