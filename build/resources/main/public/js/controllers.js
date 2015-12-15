@@ -61,7 +61,7 @@ angular.module('app.controllers', [])
     };
 })
 
-.controller('ColocListCtrl', function($scope, $rootScope, $http) {
+.controller('ColocListCtrl', function($scope, $rootScope, $http, $timeout) {
         // console.log(data)
         $scope.coloc = $rootScope.coloc;
 
@@ -169,6 +169,16 @@ angular.module('app.controllers', [])
                     $scope.dim_task=tache_dimanche;
                 })
             });
+
+    var poll = function(){
+        $timeout(function(){
+            $http.get('api/v1/colocs/'+$rootScope.coloc.name).success(function(data){
+                $scope.coloc = data;
+            });
+            poll();
+        }, 5000);
+    };
+    poll();
 
     //Fonction
 

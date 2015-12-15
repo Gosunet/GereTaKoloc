@@ -1,0 +1,34 @@
+<ion-view title="Profil">
+    <ion-content padding="true" ng-controller="ColocListCtrl">
+
+      <ion-nav-bar class="bar-stable bar-header bar-royal">
+        <ion-nav-buttons>
+          <a href="#/home" class="button button-icon button-clear ion-home" ></a>
+        </ion-nav-buttons>
+      </ion-nav-bar>
+
+      <div class="spacer" style="height: 40px;"></div>
+
+      <div class="card card-couverture">
+	  
+		<div class="item item-dark item-divider">
+		<h1 class="login" style="float:left">{{coloc.users[0].login}}</h1>
+		<button class="button button-large modif-profil button-icon ion-compose"></button>
+		
+		</div>
+          
+		  <img class="pdp" src="{{coloc.users[0].avatar}}" ng-click="modifierPhoto()">
+          <div class="block-nom">
+            <h2 class="username">{{coloc.users[0].name}} {{coloc.users[0].surname}}</h2>
+            
+          </div>
+		  
+		
+		<div class="item item-divider description">Mon humeur : "{{coloc.users[0].description}}"</div>
+
+	  </div>
+
+        </ion-content>
+
+
+</ion-view>

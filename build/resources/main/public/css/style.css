@@ -135,3 +135,61 @@ p#Content-regle{
 .check-box{
     float:right;
 }
+
+/*EMPLACEMENT POUR LE PROFIL*/
+
+.pdp{
+
+    float: left;
+    display:inline-block;
+    vertical-align:top;
+
+    padding: 20px;
+    background-color: white;
+    border-radius: 30px;
+    height: 150px;
+    width: 150px;
+}
+.card-couverture{
+    height:auto;
+    width:auto;
+    color:black;
+    background-color: black;
+}
+
+.btn-modif-photo{
+    position: absolute;
+    left:45px;
+    top:220px;
+}
+
+.block-nom{
+    display: inline-block;
+    vertical-align:top;
+}
+
+h2.username{
+    padding:15px;
+    font-size:30px;
+    color:#696969;
+}
+
+h1.login{
+    font-size: 40px;
+    color:white;
+}
+
+.description{
+    font-size:20px;
+
+}
+.item_username{
+    width:100%;
+}
+
+.modif-profil{
+    height:60px;
+    width:60px;
+    size:40px;
+    float:right;
+}
